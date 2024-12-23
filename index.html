@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Friends - Community</title>
+
+    <!-- Internal CSS for styling -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fdf6e3; /* Soft cream */
+            color: #4e4b47; /* Dark grayish brown */
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #e6a57e; /* Warm terracotta */
+            color: #ffffff;
+            text-align: center;
+            padding: 50px 20px;
+            border-bottom: 5px solid #d1c6b1;
+        }
+
+        header h1 {
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            font-size: 30px;
+            color: #e6a57e;
+            border-bottom: 3px solid #e6a57e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            font-size: 18px;
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "✔";
+            color: #a3b29c;
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+            line-height: 18px;
+        }
+
+        .button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #e6a57e;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #cf916b;
+        }
+
+        #guidelines {
+            display: none; /* Hide guidelines by default */
+        }
+
+        footer {
+            background-color: #4e4b47;
+            color: #fdf6e3;
+            text-align: center;
+            padding: 20px;
+            border-top: 5px solid #e6a57e;
+        }
+    </style>
+    <script>
+        function toggleGuidelines() {
+            const guidelines = document.getElementById('guidelines');
+            guidelines.style.display = guidelines.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>The Friends</h1>
+        <p>A cozy community for growth, positivity, and respect</p>
+    </header>
+
+    <!-- Welcome Section -->
+    <div class="container">
+        <h2>Welcome!</h2>
+        <p>Hey guys! Welcome to our little corner on the web. This is where we keep things organized and ensure our vibe stays awesome. Love y'all!</p>
+    </div>
+
+    <!-- Group Milestones Section -->
+    <div class="container">
+        <h2>Group Milestones</h2>
+        <ul>
+            <li><strong>2024:</strong> We finished Primary 6 together – what a journey!</li>
+            <li><strong>2025:</strong> Stepping into Secondary 1 and ready for new adventures!</li>
+            <li><strong>December 2024:</strong> "The Friends" community was created.</li>
+        
+        </ul>
+    </div>
+
+    <!-- Guidelines Button -->
+    <a class="button" onclick="toggleGuidelines()">Guidelines</a>
+
+    <!-- Guidelines Section -->
+    <div id="guidelines" class="container">
+        <h2>Community Guidelines</h2>
+        <ul>
+            <li><strong>Professionalism:</strong> Avoid spamming and ensure only authorized individuals participate in the group.</li>
+            <li><strong>Respect:</strong> Treat everyone with courtesy and avoid any form of harassment.</li>
+            <li><strong>Positivity:</strong> Maintain a positive, constructive atmosphere for relevant discussions.</li>
+            <li><strong>Appropriateness:</strong> Refrain from sharing inappropriate content like gifs, links, or videos.</li>
+            <li><strong>Personal Growth:</strong> Embrace the Sigma mindset and strive for self-improvement.</li>
+            <li><strong>Admin Privileges:</strong> Misuse of admin privileges will result in immediate removal.</li>
+        </ul>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 The Friends | All Rights Reserved</p>
+    </footer>
+</body>
+
+</html>
