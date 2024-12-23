@@ -256,6 +256,144 @@
         }
     }
 </script>
+      /* Rhythm Mini-Game Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .rhythm-btn {
+            width: 100px;
+            height: 100px;
+            background-color: #b3e5fc;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .rhythm-btn.active {
+            background-color: #0288d1;
+        }
+
+        #game-message {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: #0288d1;
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #01579b;
+        }
+    </style>
+</head>
+
+        <!-- Rhythm Mini-Game -->
+        <div id="rhythm-game">
+            <h3>SomewhatRhythm Mini-Game</h3>
+            <p>Press the buttons in the correct order as the pattern plays. Can you keep up?</p>
+            <div id="game-board">
+                <button class="rhythm-btn" id="btn1" onclick="playerInput(1)"></button>
+                <button class="rhythm-btn" id="btn2" onclick="playerInput(2)"></button>
+                <button class="rhythm-btn" id="btn3" onclick="playerInput(3)"></button>
+                <button class="rhythm-btn" id="btn4" onclick="playerInput(4)"></button>
+            </div>
+            <p id="game-message">Press Start to Begin!</p>
+            <button onclick="startGame()">Start Game</button>
+        </div>
+    </div>
+
+    <script>
+        // Rhythm Mini-Game Logic
+        let sequence = [];
+        let playerSequence = [];
+        let level = 0;
+
+        function startGame() {
+            sequence = [];
+            playerSequence = [];
+            level = 0;
+            document.getElementById('game-message').textContent = "Watch the pattern...";
+            nextLevel();
+        }
+
+        function nextLevel() {
+            playerSequence = [];
+            level++;
+            document.getElementById('game-message').textContent = `Level ${level}`;
+            const nextButton = Math.floor(Math.random() * 4) + 1;
+            sequence.push(nextButton);
+            playSequence();
+        }
+
+        function playSequence() {
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < sequence.length) {
+                    highlightButton(sequence[i]);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('game-message').textContent = "Your Turn!";
+                }
+            }, 800);
+        }
+
+        function highlightButton(buttonId) {
+            const button = document.getElementById(`btn${buttonId}`);
+            button.classList.add('active');
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 400);
+        }
+
+        function playerInput(buttonId) {
+            playerSequence.push(buttonId);
+            const currentStep = playerSequence.length - 1;
+
+            if (playerSequence[currentStep] !== sequence[currentStep]) {
+                document.getElementById('game-message').textContent = "Wrong! Game Over!";
+                return;
+            }
+
+            if (playerSequence.length === sequence.length) {
+                document.getElementById('game-message').textContent = "Well Done! Next Level!";
+                setTimeout(nextLevel, 1000);
+            }
+        }
+    </script>
 
 
     <!-- Pending Content Section -->
