@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhythm Mini-Game</title>
+    <style>
+        /* Cozy Color Palette */
+        body {
+            background-color: #F9E0A6; /* Light cream background */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #6B4226; /* Warm brown text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Centering Game Container */
+        .container {
+            text-align: center;
+            background-color: #FFF4E6; /* Light peachy background for the container */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #6B4226;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #6B4226;
+        }
+
+        /* Cozy Buttons */
+        button {
+            padding: 12px 24px;
+            background-color: #F1A7A6; /* Soft coral color */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #F28D7B; /* Slightly darker coral on hover */
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Rhythm Game Board */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .rhythm-btn {
+            width: 100px;
+            heig
