@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poopy Clicker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F1E6D6;
+            color: #5D4037;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .game-container {
+            background-color: #FFF4E6;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #8D6E63;
+        }
+
+        #clicker-button {
+            background-color: #8D6E63;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 2rem;
+            padding: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            margin-top: 30px;
+        }
+
+        #clicker-button:hover {
+            background-color: #6D4C41;
+            transform: scale(1.1);
+        }
+
+        #clicker-button:active {
+            background-color: #4E342E;
+        }
+
+        .stats {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .upgrades {
+            margin-top: 30px;
+        }
+
+        .upgrade-btn {
+            background-color: #FFEB3B;
+            color: #5D4037;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin: 10px;
+        }
+
+        .upgrade-btn:hover {
+            background-color: #FBC02D;
+        }
+
+        .upgrade-btn:disabled {
+            background-color: #BDBDBD;
+            cursor: not-allowed;
+        }
+
+        .auto-clicker {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        #poop-graphic {
+            width: 100px;
+            height: 100px;
+            background-image: url('https://cdn.pixabay.com/photo/2017/09/01/01/44/poop-2700642_960_720.png'); /* Placeholder poop image */
+            background-size: cover;
+            margin-top: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0;
+            background-color: #8D6E63;
+            border-radius: 10px;
+        }
+
+        /* Custom animations */
+        @keyframes poopAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Back to Main Page Button */
+        #back-button {
+            background-color: #D1C4E9;
+            color: #5D4037;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #back-button:hover {
+            background-color: #B39DDB;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Poopy Clicker</h1>
+
+    <!-- Poop graphic and button -->
+    <div id="poop-graphic"></div>
+    <button id="clicker-button">Poop!</button>
+
+    <!-- Stats and Progress -->
+    <div class="stats">
+        <p>Poops: <span id="poop-count">0</span></p>
+        <p>Click Value: <span id="click-value">1</span></p>
+    </div>
+
+    <!-- Upgrade Buttons -->
+    <div class="upgrades">
+        <button id="upgrade-click-value" class="upgrade-btn">Upgrade Poop Value (Cost: 10)</button>
+        <button id="buy-auto-clicker" class="upgrade-btn">Buy Auto-Clicker (Cost: 50)</button>
+    </div>
+
+    <!-- Auto-Clicker and Progress -->
+    <div class="auto-clicker">
+        <p>Auto-Clickers: <span id="auto-clicker-count">0</span></p>
+        <p>Auto-Clicks Per Second: <span id="auto-clicks-per-sec">0</span></p>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+    </div>
+
+    <!-- Back Button to Main Page -->
+    <button id="back-button" onclick="window.location.href='index.html'">Back to Main Page</button>
+</div>
+
+<script>
+    // Game state variables
+    let poopCount = 0;
+    let clickValue = 1;
+    let autoClickers = 0;
+    let autoClickRate = 0; // Auto clicks per second
+
+    // DOM elements
+    const poopCountElement = document.getElementById('poop-count');
+    const clickValueElement = document.getElementById('click-value');
+    const upgradeClickValueBtn = document.getElementById('upgrade-click-value');
+    const buyAutoClickerBtn = document.getElementById('buy-auto-clicker');
+    const autoClickerCountElement = document.getElementById('auto-clicker-count');
+    const autoClicksPerSecElement = document.getElementById('auto-clicks-per-sec');
+    const progressBar = document.getElementById('progress-bar');
+    const poopGraphic = document.getElementById('poop-graphic');
+    const clickerButton = document.getElementById('clicker-button');
+
+    // Function to handle click
+    clickerButton.addEventListener('click', () => {
+        poopCount += clickValue;
+        updateStats();
+        poopGraphic.style.animation = 'poopAnimation 0.5s ease-in-out'; // Poop animation
+        setTimeout(() => poopGraphic.style.animation = '', 500); // Reset animation
+    });
+
+    // Upgrade click value
+    upgradeClickValueBtn.addEventListener('click', () => {
+        if (poopCount >= 10) {
+            poopCount -= 10;
+            clickValue += 1;
+            updateStats();
+        }
+    });
+
+    // Buy auto-clicker
+    buyAutoClickerBtn.addEventListener('click', () => {
+        if (poopCount >= 50) {
+            poopCount -= 50;
+            autoClickers += 1;
+            autoClickRate = autoClickers * 1; // 1 click per second per auto-clicker
+            updateStats();
+        }
+    });
+
+    // Auto-clickers function
+    setInterval(() => {
+        if (autoClickers > 0) {
+            poopCount += autoClickRate;
+            updateStats();
+        }
+    }, 1000);
+
+    // Update the game stats
+    function updateStats() {
+        poopCountElement.textContent = poopCount;
+        clickValueElement.textContent = clickValue;
+        autoClickerCountElement.textContent = autoClickers;
+        autoClicksPerSecElement.textContent = autoClickRate;
+
+        // Update progress bar (poop count progress)
+        let progress = Math.min(poopCount / 100, 1) * 100; // Max 100% progress
+        progressBar.style.width = progress + '%';
+
+        // Disable or enable buttons based on the current poop count
+        upgradeClickValueBtn.disabled = poopCount < 10;
+        buyAutoClickerBtn.disabled = poopCount < 50;
+    }
+</script>
+
+</body>
+</html>
