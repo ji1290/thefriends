@@ -193,6 +193,70 @@
             <li><strong>Abuse of Admin Privileges:</strong> Anyone who abuses admin privileges will be kicked from the group.</li>
         </ul>
     </div>
+    <!-- Mini Games Section -->
+<div class="container" id="mini-games">
+    <h2>Mini Games</h2>
+
+    <!-- Number Guessing Game -->
+    <div id="number-guessing-game">
+        <h3>Number Guessing Game</h3>
+        <p>Try to guess the number between 1 and 100!</p>
+        <input type="number" id="guess-input" placeholder="Enter your guess" />
+        <button onclick="checkGuess()">Guess</button>
+        <p id="guess-result"></p>
+    </div>
+
+    <hr>
+
+    <!-- Rock-Paper-Scissors Game -->
+    <div id="rock-paper-scissors-game">
+        <h3>Rock-Paper-Scissors</h3>
+        <p>Choose your move:</p>
+        <button onclick="playRPS('rock')">Rock</button>
+        <button onclick="playRPS('paper')">Paper</button>
+        <button onclick="playRPS('scissors')">Scissors</button>
+        <p id="rps-result"></p>
+    </div>
+</div>
+
+<script>
+    // Number Guessing Game Logic
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    function checkGuess() {
+        const guess = parseInt(document.getElementById('guess-input').value);
+        const result = document.getElementById('guess-result');
+        if (isNaN(guess)) {
+            result.textContent = "Please enter a valid number!";
+        } else if (guess < secretNumber) {
+            result.textContent = "Too low! Try again.";
+        } else if (guess > secretNumber) {
+            result.textContent = "Too high! Try again.";
+        } else {
+            result.textContent = "Congratulations! You guessed the number!";
+            secretNumber = Math.floor(Math.random() * 100) + 1; // Reset the game
+        }
+    }
+
+    // Rock-Paper-Scissors Game Logic
+    function playRPS(playerChoice) {
+        const choices = ['rock', 'paper', 'scissors'];
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+        const result = document.getElementById('rps-result');
+
+        if (playerChoice === computerChoice) {
+            result.textContent = `It's a tie! You both chose ${playerChoice}.`;
+        } else if (
+            (playerChoice === 'rock' && computerChoice === 'scissors') ||
+            (playerChoice === 'paper' && computerChoice === 'rock') ||
+            (playerChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            result.textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
+        } else {
+            result.textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
+        }
+    }
+</script>
+
 
     <!-- Pending Content Section -->
     <div id="pending-content" class="container">
