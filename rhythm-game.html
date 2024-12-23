@@ -69,4 +69,124 @@
 
         .rhythm-btn {
             width: 100px;
-            heig
+            height: 100px;
+            background-color: #E4BBAF; /* Warm beige buttons */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .rhythm-btn.active {
+            background-color: #D25C5C; /* Soft red when active */
+        }
+
+        /* Back Button to Main Site */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #F1A7A6; /* Soft coral */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #F28D7B; /* Slightly darker coral on hover */
+        }
+
+        /* Message text styling */
+        #game-message {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #6B4226;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button to Return to Main Site -->
+    <button class="back-button" onclick="window.location.href='index.html'">Back to Main Site</button>
+
+    <div class="container">
+        <h1>Rhythm Mini-Game</h1>
+        <p>Press the buttons in the correct order as the pattern plays. Can you keep up?</p>
+
+        <!-- Game Board -->
+        <div id="game-board">
+            <button class="rhythm-btn" id="btn1" onclick="playerInput(1)"></button>
+            <button class="rhythm-btn" id="btn2" onclick="playerInput(2)"></button>
+            <button class="rhythm-btn" id="btn3" onclick="playerInput(3)"></button>
+            <button class="rhythm-btn" id="btn4" onclick="playerInput(4)"></button>
+        </div>
+
+        <p id="game-message">Press Start to Begin!</p>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        // Rhythm Mini-Game Logic
+        let sequence = [];
+        let playerSequence = [];
+        let level = 0;
+
+        function startGame() {
+            sequence = [];
+            playerSequence = [];
+            level = 0;
+            document.getElementById('game-message').textContent = "Watch the pattern...";
+            nextLevel();
+        }
+
+        function nextLevel() {
+            playerSequence = [];
+            level++;
+            document.getElementById('game-message').textContent = `Level ${level}`;
+            const nextButton = Math.floor(Math.random() * 4) + 1;
+            sequence.push(nextButton);
+            playSequence();
+        }
+
+        function playSequence() {
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < sequence.length) {
+                    highlightButton(sequence[i]);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('game-message').textContent = "Your Turn!";
+                }
+            }, 800);
+        }
+
+        function highlightButton(buttonId) {
+            const button = document.getElementById(`btn${buttonId}`);
+            button.classList.add('active');
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 400);
+        }
+
+        function playerInput(buttonId) {
+            playerSequence.push(buttonId);
+            const currentStep = playerSequence.length - 1;
+
+            if (playerSequence[currentStep] !== sequence[currentStep]) {
+                document.getElementById('game-message').textContent = "Wrong! Game Over!";
+                return;
+            }
+
+            if (playerSequence.length === sequence.length) {
+                document.getElementById('game-message').textContent = "Well Done! Next Level!";
+                setTimeout(nextLevel, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
