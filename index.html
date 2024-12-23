@@ -256,69 +256,10 @@
         }
     }
 </script>
-      /* Rhythm Mini-Game Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #game-board {
-            display: grid;
-            grid-template-columns: repeat(2, 100px);
-            gap: 10px;
-            justify-content: center;
-            margin: 20px auto;
-        }
-
-        .rhythm-btn {
-            width: 100px;
-            height: 100px;
-            background-color: #b3e5fc;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .rhythm-btn.active {
-            background-color: #0288d1;
-        }
-
-        #game-message {
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border: none;
-            background-color: #0288d1;
-            color: white;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #01579b;
-        }
-    </style>
-</head>
+    <!-- Button to Redirect to the Rhythm Game -->
+    <button onclick="window.location.href='rhythm-game.html'">Play Rhythm Mini-Game</button>
+</div>
 
 <!-- Pending Content Section -->
     <div id="pending-content" class="container">
