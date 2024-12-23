@@ -119,6 +119,31 @@
             bottom: 0;
             width: 100%;
         }
+        /* Styling for the Play Rhythm Mini-Game Button */
+.play-rhythm-button {
+    padding: 15px 30px;
+    background-color: #9B59B6; /* Purple color */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.play-rhythm-button:hover {
+    background-color: #8E44AD; /* Darker purple on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+.play-rhythm-button:active {
+    background-color: #7D3C98; /* Even darker purple when pressed */
+}
     </style>
 
     <script>
@@ -257,9 +282,9 @@
     }
 </script>
 
-    <!-- Button to Redirect to the Rhythm Game -->
-    <button onclick="window.location.href='rhythm-game.html'">Play Rhythm Mini-Game</button>
-</div>
+    <!-- Updated Button to Redirect to the Rhythm Game -->
+<button class="play-rhythm-button" onclick="window.location.href='rhythm-game.html'">Play Rhythm Mini-Game</button>
+    
 
 <!-- Pending Content Section -->
     <div id="pending-content" class="container">
